@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林郁嫻 - 關於我 | About Me</title>
+    <!-- 引入 Google Fonts: Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // 淺綠色系設定
+                        primary: '#76c794',       // 主色：清新的綠色
+                        primaryDark: '#569e70',   // 深色：用於文字強調
+                        secondary: '#f1fcf5',     // 背景：極淺的綠白色
+                        accent: '#b8e6c9',        // 裝飾色
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* 自定義動畫 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body class="bg-secondary text-slate-700 font-sans selection:bg-primary selection:text-white">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- LOGO -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-2xl font-bold tracking-wider hover:text-primary transition-colors">
+                        YUE <span class="text-primary">LI</span>
+                    </a>
+                </div>
+                
+                <!-- 電腦版選單 -->
+                <div class="hidden md:block">
+                    <ul class="flex space-x-8 items-center">
+                        <li><a href="index.html" class="text-gray-500 hover:text-primary font-medium transition-colors">首頁</a></li>
+                        <li><a href="works.html" class="text-gray-500 hover:text-primary font-medium transition-colors">作品集</a></li>
+                        <li><a href="about.html" class="text-primary font-bold border-b-2 border-primary pb-1">關於我</a></li>
+                    </ul>
+                </div>
+
+                <!-- 手機版選單按鈕 -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容區塊 -->
+    <main class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center">
+        <div class="max-w-5xl w-full mx-auto">
+            
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row animate-fade-in border border-green-50">
+                
+                <!-- 左側：圖片區塊 -->
+                <div class="md:w-5/12 bg-white p-8 flex flex-col items-center justify-center md:border-r border-gray-100 relative">
+                    <!-- 背景裝飾圓點 (增加層次感) -->
+                    <div class="absolute top-10 left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl"></div>
+
+                    <div class="relative z-10">
+                        <!-- 修改處：移除 rounded 讓邊框變直角 -->
+                        <div class="p-1 border-2 border-primary/30 shadow-sm bg-white">
+                             <!-- 圖片：修改處 - 加入 aspect-square (強制正方形)，移除 rounded (直角) -->
+                            <img 
+                                src="profile.png" 
+                                alt="林郁嫻 Profile" 
+                                class="w-full max-w-[280px] aspect-square object-cover">
+                            <!-- 錯誤處理顯示文字 -->
+                            <span style="display:none; position:absolute; bottom:10px; left:0; width:100%; text-align:center; color:white; text-shadow:0 1px 3px rgba(0,0,0,0.8); font-size:0.8rem;">(範例圖片)</span>
+                        </div>
+                        
+                        <!-- 已移除 PHOTO 字樣 -->
+                    </div>
+                </div>
+
+                <!-- 右側：內容區塊 -->
+                <div class="md:w-7/12 p-8 md:p-12 flex flex-col justify-center bg-white">
+                    
+                    <div class="mb-6 animate-fade-in delay-100">
+                        <span class="text-primary font-bold tracking-widest text-sm uppercase mb-2 block">Profile</span>
+                        <h1 class="text-4xl font-bold text-gray-800 mb-2">關於我 <span class="text-gray-300 font-light">ABOUT ME</span></h1>
+                        <div class="h-1 w-20 bg-primary rounded-full mt-4"></div>
+                    </div>
+
+                    <div class="space-y-6 text-gray-600 leading-relaxed animate-fade-in delay-200">
+                        <!-- 第一段：基本介紹 -->
+                        <p>
+                            你好，我是 <strong class="text-gray-800 text-lg">林郁嫻</strong>。
+                            <br>目前就讀於 <span class="inline-block bg-primary/10 text-primaryDark px-2 py-0.5 rounded font-medium mt-1">台南應用科技大學多媒體動畫系</span>。
+                        </p>
+                        
+                        <!-- 第二段：美術與繪畫 -->
+                        <p>
+                            我熱愛創作與表演。在團隊合作中，我擅長運用色彩與光影，通常擔任 <span class="text-primaryDark font-bold border-b-2 border-primary/30 pb-0.5">上色</span> 與 <span class="text-primaryDark font-bold border-b-2 border-primary/30 pb-0.5">美術繪畫</span> 的工作。
+                        </p>
+                        
+                        <!-- 第三段：演員與表演 -->
+                        <p>
+                            除此之外，我對鏡頭前的表現也有濃厚興趣。在攝影與影視作業中，常擔任 <span class="text-primaryDark font-bold border-b-2 border-primary/30 pb-0.5">演員</span> 的角色，享受詮釋角色的過程。
+                        </p>
+                    </div>
+
+
+                    <hr class="my-8 border-gray-100">
+
+                    <!-- 聯絡資訊 -->
+                    <div class="animate-fade-in delay-300">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="far fa-address-card mr-2 text-primary"></i> 聯絡資訊 Contact
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <a href="tel:012370835" class="flex items-center p-3 rounded-lg bg-gray-50 hover:bg-primary/10 transition-colors group border border-transparent hover:border-primary/20">
+                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <span class="ml-3 font-medium text-gray-700">012370835</span>
+                            </a>
+                            
+                            <a href="mailto:d12370835@gm.tut.edu.tw" class="flex items-center p-3 rounded-lg bg-gray-50 hover:bg-primary/10 transition-colors group border border-transparent hover:border-primary/20">
+                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <span class="ml-3 font-medium text-gray-700 text-sm break-all">d12370835@gm.tut.edu.tw</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="text-center py-6 text-gray-400 text-sm">
+        <p>&copy; 2024 YUE LI. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林郁嫻 - 首頁 | Home</title>
+    <!-- 引入 Google Fonts: Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#76c794',
+                        primaryDark: '#569e70',
+                        secondary: '#f1fcf5',
+                        accent: '#b8e6c9',
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* 確保背景圖不被選取 */
+        .bg-image {
+            user-select: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-secondary text-slate-700 font-sans selection:bg-primary selection:text-white flex flex-col min-h-screen">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-2xl font-bold tracking-wider hover:text-primary transition-colors">
+                        YUE <span class="text-primary">LI</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:block">
+                    <ul class="flex space-x-8 items-center">
+                        <li><a href="index.html" class="text-primary font-bold border-b-2 border-primary pb-1">首頁</a></li>
+                        <li><a href="works.html" class="text-gray-500 hover:text-primary font-medium transition-colors">作品集</a></li>
+                        <li><a href="about.html" class="text-gray-500 hover:text-primary font-medium transition-colors">關於我</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 滿版背景圖片區塊 -->
+    <div class="fixed inset-0 z-0 bg-image">
+        <!-- 透明度設為 0.25 (opacity-25) -->
+        <img 
+            src="IMG_3473.jpg" 
+            alt="Background" 
+            class="w-full h-full object-cover opacity-25 grayscale-[20%]">
+        <!-- 疊加一層淡淡的漸層，讓文字更清晰 -->
+        <div class="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-secondary/30"></div>
+    </div>
+
+    <!-- 首頁主要內容 -->
+    <main class="relative z-10 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
+        <div class="max-w-4xl w-full mx-auto text-center animate-fade-in">
+            
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-800 leading-tight mb-8 drop-shadow-sm">
+                創造 <span class="text-primary">視覺</span> <br class="hidden md:block">
+                與 <span class="text-primary">光影</span> 的故事
+            </h1>
+            
+            <p class="text-gray-600 text-lg md:text-xl mb-10 leading-relaxed max-w-2xl mx-auto">
+                你好，我是林郁嫻。<br>
+                一名熱愛多媒體動畫與表演藝術的創作者。<br>
+                歡迎來到我的個人作品集網站。
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-5 justify-center">
+                <a href="works.html" class="px-10 py-3.5 bg-primary text-white rounded-full font-medium shadow-lg shadow-primary/30 hover:bg-primaryDark hover:-translate-y-1 transition-all duration-300">
+                    瀏覽作品
+                </a>
+                <a href="about.html" class="px-10 py-3.5 bg-white/80 backdrop-blur text-primary border border-primary/30 rounded-full font-medium hover:bg-white hover:shadow-md transition-all duration-300">
+                    關於我
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="relative z-10 text-center py-6 text-gray-400 text-sm">
+    </footer>
+</body>
+</html>

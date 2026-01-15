@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林郁嫻 - 作品集 | Works</title>
+    <!-- 引入 Google Fonts: Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#76c794',
+                        primaryDark: '#569e70',
+                        secondary: '#f1fcf5',
+                        accent: '#b8e6c9',
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        
+        /* 作品卡片樣式 */
+        .work-card {
+            display: block;
+            overflow: hidden;
+            position: relative;
+            isolation: isolate; /* 建立新的堆疊上下文 */
+            cursor: pointer;
+        }
+
+        .work-card img {
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center center;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 滑鼠懸停時圖片放大 */
+        .work-card:hover img {
+            transform: scale(1.15);
+        }
+
+        /* 文字內容出現的微動畫 */
+        .work-content {
+            transform: translateY(20px);
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+        }
+        
+        .work-card:hover .work-content {
+            transform: translateY(0);
+        }
+
+        /* 影片播放按鈕 (在沒有 Hover 時顯示) */
+        .play-icon-static {
+            transition: opacity 0.3s ease;
+        }
+        .work-card:hover .play-icon-static {
+            opacity: 0; /* Hover 時隱藏原本的播放鈕，避免干擾文字 */
+        }
+
+        /* 燈箱樣式 */
+        .lightbox-open {
+            overflow: hidden; /* 防止背景滾動 */
+        }
+    </style>
+</head>
+<body class="bg-secondary text-slate-700 font-sans selection:bg-primary selection:text-white">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <!-- 修正 Logo 連結 -->
+                    <a href="index.html" class="text-2xl font-bold tracking-wider hover:text-primary transition-colors">
+                        YUE <span class="text-primary">LI</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:block">
+                    <ul class="flex space-x-8 items-center">
+                        <!-- 修正導覽連結 -->
+                        <li><a href="index.html" class="text-gray-500 hover:text-primary font-medium transition-colors">首頁</a></li>
+                        <li><a href="works.html" class="text-primary font-bold border-b-2 border-primary pb-1">作品集</a></li>
+                        <li><a href="about.html" class="text-gray-500 hover:text-primary font-medium transition-colors">關於我</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容區塊 -->
+    <main class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- 頁面標題 -->
+            <div class="text-center mb-16 animate-fade-in">
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">作品集 <span class="text-gray-300 font-light">WORKS</span></h1>
+                <div class="h-1 w-20 bg-primary rounded-full mx-auto mt-4 mb-6"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto">這裡展示了我精選的平面設計與影視創作。請將滑鼠移至圖片上查看詳細介紹，點擊平面作品可查看大圖。</p>
+            </div>
+
+            <!-- 分類一：平面美術 -->
+            <div class="mb-20 animate-fade-in delay-100">
+                <div class="flex items-center mb-8 border-b border-gray-200 pb-4">
+                    <div class="w-1.5 h-8 bg-primary mr-3 rounded-full"></div>
+                    <h2 class="text-2xl font-bold text-gray-800">平面作品 <span class="text-sm font-normal text-gray-400 ml-2">Graphic Art</span></h2>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Art Item 1 -->
+                    <!-- 添加 lightbox-trigger class -->
+                    <a href="#" class="work-card lightbox-trigger group aspect-[4/3] rounded-2xl shadow-md">
+                        <img src="IMG_3472.JPG" alt="演唱會應援">
+                        
+                        <!-- 懸浮遮罩層 -->
+                        <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                            <div class="work-content">
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">演唱會應援</h3>
+                                <span class="text-xs text-primary font-bold uppercase tracking-wider mb-3 block">Character Design</span>
+                                <p class="text-sm text-gray-500 leading-relaxed">為崔叡娜演唱會所繪製的應援。</p>
+                                <span class="mt-4 text-xs text-primary border border-primary px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-colors">查看大圖</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Art Item 2 -->
+                    <a href="#" class="work-card lightbox-trigger group aspect-[4/3] rounded-2xl shadow-md">
+                        <img src="IMG_3453.JPG" alt="演唱會應援">
+                        
+                        <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                            <div class="work-content">
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">演唱會應援</h3>
+                                <p class="text-sm text-gray-500 leading-relaxed">為zerobaseone演唱會所繪製的應援。</p>
+                                <span class="mt-4 text-xs text-primary border border-primary px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-colors">查看大圖</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Art Item 3 -->
+                    <a href="#" class="work-card lightbox-trigger group aspect-[4/3] rounded-2xl shadow-md">
+                        <img src="IMG_3475.JPG" alt="角色創作">
+                        
+                        <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                            <div class="work-content">
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">角色創作</h3>
+                                <p class="text-sm text-gray-500 leading-relaxed">oc創作。</p>
+                                <span class="mt-4 text-xs text-primary border border-primary px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-colors">查看大圖</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Art Item 4 -->
+                    <a href="#" class="work-card lightbox-trigger group aspect-[4/3] rounded-2xl shadow-md">
+                        <img src="IMG_3474.JPG" alt="角色創作">
+                        
+                        <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                            <div class="work-content">
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">角色創作</h3>
+                                <span class="text-xs text-primary font-bold uppercase tracking-wider mb-3 block">Concept Art</span>
+                                <p class="text-sm text-gray-500 leading-relaxed">角色創作。</p>
+                                <span class="mt-4 text-xs text-primary border border-primary px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-colors">查看大圖</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 分類二：影視作品 -->
+            <div class="mb-16 animate-fade-in delay-200">
+                <div class="flex items-center mb-8 border-b border-gray-200 pb-4">
+                    <div class="w-1.5 h-8 bg-primary mr-3 rounded-full"></div>
+                    <h2 class="text-2xl font-bold text-gray-800">影視作品 <span class="text-sm font-normal text-gray-400 ml-2">Film & Video</span></h2>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Film Item 1 -->
+                    <a href="https://youtu.be/T6nfxfLvU8s" target="_blank" class="work-card group aspect-video rounded-2xl shadow-md">
+                        <img src="IMG_2686.PNG" alt="影片仿拍">
+                        
+                        <!-- 靜態時顯示的播放按鈕 (Hover時隱藏) -->
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none play-icon-static">
+                            <div class="w-12 h-12 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/50">
+                                <i class="fas fa-play ml-1 text-lg"></i>
+                            </div>
+                        </div>
+
+                        <!-- 懸浮遮罩層 -->
+                        <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                            <div class="work-content">
+                                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white mb-3 mx-auto shadow-sm">
+                                    <i class="fas fa-play ml-1"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">影片仿拍</h3>
+                                <p class="text-sm text-gray-500 leading-relaxed">泰國廣告。</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Film Item 2 -->
+                    <a href="https://youtu.be/Ld8jo9S4DX0" target="_blank" class="work-card group aspect-video rounded-2xl shadow-md">
+                        <img src="IMG_2685.PNG" alt="影片仿拍">
+                        
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none play-icon-static">
+                            <div class="w-12 h-12 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/50">
+                                <i class="fas fa-play ml-1 text-lg"></i>
+                            </div>
+                        </div>
+
+                        <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                            <div class="work-content">
+                                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white mb-3 mx-auto shadow-sm">
+                                    <i class="fas fa-play ml-1"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">影片仿拍</h3>
+                                <p class="text-sm text-gray-500 leading-relaxed">哈利波特。</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Film Item 3 -->
+                    <a href="https://youtu.be/n5uoXfKFf7Q" target="_blank" class="work-card group aspect-video rounded-2xl shadow-md">
+                        <img src="IMG_2689.PNG" alt="蒙娜麗殺">
+                        
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none play-icon-static">
+                            <div class="w-12 h-12 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/50">
+                                <i class="fas fa-play ml-1 text-lg"></i>
+                            </div>
+                        </div>
+
+                        <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                            <div class="work-content">
+                                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white mb-3 mx-auto shadow-sm">
+                                    <i class="fas fa-play ml-1"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">蒙娜麗殺</h3>
+                                <span class="text-xs text-primary font-bold uppercase tracking-wider mb-2 block">Storyboard Animatic</span>
+                                <p class="text-sm text-gray-500 leading-relaxed">一個客趟作業引發的神秘邂逅，主角遇見與蒙娜麗莎極度相似的女子，逐步陷入失控的藝術與真相的炫渦中。</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Film Item 4 -->
+                    <a href="https://youtu.be/urdtRiWRyL8" target="_blank" class="work-card group aspect-video rounded-2xl shadow-md">
+                        <img src="IMG_2687.PNG" alt="ADIOS">
+                        
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none play-icon-static">
+                            <div class="w-12 h-12 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/50">
+                                <i class="fas fa-play ml-1 text-lg"></i>
+                            </div>
+                        </div>
+
+                        <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                            <div class="work-content">
+                                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white mb-3 mx-auto shadow-sm">
+                                    <i class="fas fa-play ml-1"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">ADIOS</h3>
+                                <span class="text-xs text-primary font-bold uppercase tracking-wider mb-2 block">Video Editing</span>
+                                <p class="text-sm text-gray-500 leading-relaxed">少女墜入愛河但卻遭受背叛，情感失控釀成悲劇，一場愛與背叛的故事。。</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 mt-auto">
+        <div class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold text-gray-800">YUE LI</span>
+                </div>
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="https://www.instagram.com/yueli_01_13?igsh=dW02eGx0enBodmF4&utm_source=qr" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="https://www.facebook.com/share/1Aa2EwNi5b/?mibextid=wwXIfr" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-facebook text-xl"></i></a>
+                <div class="text-gray-400 text-sm">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 燈箱 Modal (預設隱藏) -->
+    <div id="imageModal" class="fixed inset-0 z-[60] bg-black/95 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4 cursor-pointer backdrop-blur-sm">
+        <div class="relative max-w-5xl max-h-[90vh] w-full flex items-center justify-center">
+            <img id="modalImage" src="" alt="Full view" class="max-w-full max-h-[85vh] object-contain rounded shadow-2xl scale-95 transition-transform duration-300 cursor-default select-none">
+            <!-- 關閉按鈕 -->
+            <button id="closeModal" class="absolute -top-12 right-0 text-white/80 hover:text-white transition-colors p-2">
+                <i class="fas fa-times text-2xl"></i> <span class="ml-2 text-sm">關閉 (Close)</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeModalBtn = document.getElementById('closeModal');
+            const triggers = document.querySelectorAll('.lightbox-trigger');
+
+            // 開啟燈箱
+            triggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault(); // 阻止連結跳轉
+                    const imgSrc = trigger.querySelector('img').src;
+                    
+                    // 設定大圖路徑 (此處直接使用縮圖，實際專案可從 data-full-src 屬性獲取高解析圖)
+                    modalImg.src = imgSrc;
+                    
+                    // 顯示 Modal
+                    document.body.classList.add('lightbox-open'); // 禁止背景滾動
+                    modal.classList.remove('hidden');
+                    
+                    // 動畫延遲執行以產生淡入效果
+                    requestAnimationFrame(() => {
+                        modal.classList.remove('opacity-0');
+                        modalImg.classList.remove('scale-95');
+                        modalImg.classList.add('scale-100');
+                    });
+                });
+            });
+
+            // 關閉燈箱函數
+            const closeModal = () => {
+                modal.classList.add('opacity-0');
+                modalImg.classList.remove('scale-100');
+                modalImg.classList.add('scale-95');
+                
+                // 等待動畫結束後隱藏
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('lightbox-open');
+                    modalImg.src = ''; // 清空圖片
+                }, 300);
+            };
+
+            // 點擊關閉按鈕
+            closeModalBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeModal();
+            });
+
+            // 點擊背景空白處 (modal 本身) 關閉
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target.closest('.relative') === null) {
+                    closeModal();
+                }
+            });
+
+            // 按下 ESC 鍵關閉
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+            
+            // 阻止點擊圖片時關閉 (防止誤觸)
+            modalImg.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+    </script>
+
+</body>
+</html>
